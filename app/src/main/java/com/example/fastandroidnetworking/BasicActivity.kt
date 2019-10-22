@@ -59,7 +59,7 @@ class BasicActivity : AppCompatActivity() {
                             data.optString("date"),
                             data.optString("image"),
                             data.optString("description"),
-                            data.optDouble("latitute"),
+                            data.optDouble("latitude"),
                             data.optDouble("longitude")
                         )
                         )

@@ -1,8 +1,10 @@
 package com.example.fastandroidnetworking
 
+import android.content.Intent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.RecyclerView
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.item_event.view.*
@@ -20,16 +22,34 @@ RecyclerView.Adapter<EventAdapter.ViewHolder>()
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        Picasso.get()
-            .load(itemEventList[position].image).into(holder!!.imgPoster)
-        holder.txtEventTitle.text = itemEventList[position].title
-        holder.txtEventDate.text = itemEventList[position].date
+        holder.bindItems(itemEventList[position])
     }
 
     class ViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
-        val imgPoster = itemView.img_poster!!
-        val txtEventTitle = itemView.tv_event_title!!
-        val txtEventDate = itemView.tv_event_date!!
+        val context = itemView.context
+        fun bindItems(event: Event){
+            val imgPoster = itemView.img_poster!!
+            val txtEventTitle = itemView.tv_event_title!!
+            val txtEventDate = itemView.tv_event_date!!
+            val cardEvent = itemView.card_event!!
+
+
+            txtEventTitle.text = event.title
+            txtEventDate.text = event.date
+            Picasso.get().load(event.image).into(imgPoster)
+            cardEvent.setOnClickListener {
+                Toast.makeText(context, event.title, Toast.LENGTH_SHORT).show()
+                val intent = Intent(context, MainDetailActivity::class.java)
+                intent.putExtra("event_name", event.title)
+                intent.putExtra("event_date", event.date)
+                intent.putExtra("img_poster", event.image)
+                intent.putExtra("event_desc", event.description)
+                intent.putExtra("latitude", event.latitude)
+                intent.putExtra("longitude", event.longitude)
+                context.startActivity(intent)
+            }
+
+        }
     }
 
 

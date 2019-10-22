@@ -12,6 +12,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyB8zHZ3Y5hpCywZEFDMrPg7FREayQ5lbik"/>
+
+        <activity android:name=".MainDetailActivity"></activity>
         <activity
             android:name=".BasicActivity"
             android:label="@string/title_activity_basic"
@@ -22,9 +27,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity">
-
-        </activity>
+        <activity android:name=".MainActivity"></activity>
     </application>
 
 </manifest>
